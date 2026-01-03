@@ -42,8 +42,8 @@ An advanced, AI-powered Discord bot that designs and builds server structures ba
     DISCORD_TOKEN=your_discord_bot_token
     DISCORD_APP_ID=your_app_id
     GROQ_API_KEY=your_groq_key
-    # Google and OpenRouter keys are currently configured in utils/ai.py, 
-    # but you can move them here for better security.
+    GOOGLE_API_KEY=your_google_api_key
+    OPENROUTER_API_KEY=your_openrouter_key
     ```
 
 4.  **Run the bot:**
