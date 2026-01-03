@@ -1,0 +1,4 @@
+discord.py
+groq
+python-dotenv
+google-genai
