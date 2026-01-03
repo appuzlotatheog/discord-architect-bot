@@ -23,7 +23,7 @@ class ArchitectBot(commands.Bot):
     async def setup_hook(self):
         await init_db()
         await self.load_extension('cogs.architect')
-    await self.load_extension('cogs.general')
+        await self.load_extension('cogs.general')
         await self.tree.sync()
         print("Commands synced")
 

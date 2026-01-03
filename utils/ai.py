@@ -67,7 +67,7 @@ import asyncio
 from google import genai
 
 # Configure Google API
-GOOGLE_API_KEY = "AIzaSyA24oN9iWpCvAYEOvFwhl_nENOfi8Hvl_w"
+GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
 google_client = genai.Client(api_key=GOOGLE_API_KEY)
 
 async def generate_with_google(prompt):
@@ -86,7 +86,7 @@ async def generate_with_google(prompt):
 import aiohttp
 
 # Configure OpenRouter
-OPENROUTER_KEY = "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"
+OPENROUTER_KEY = os.getenv('OPENROUTER_API_KEY')
 
 async def generate_with_openrouter(prompt):
     url = "https://openrouter.ai/api/v1/chat/completions"
@@ -133,11 +133,11 @@ Generate a JSON blueprint for the requested changes.
     ]
 
     # 1. Try Google Gemini (Primary)
+    # 1. Try Google Gemini (Primary)
     try:
-        return await generate_with_google(prompt)
-        # For Google Gemini, we need to pass the user content directly, not the full messages array
-        google_prompt_content = messages[1]["content"] # Extracting the user message content
-        return await generate_with_google(google_prompt_content)
+        # Construct prompt for Google
+        google_prompt = f"{SYSTEM_PROMPT}\n\nUser Request: {description}\nStyle: {style}\nCurrent Structure: {structure_text}\nHistory: {history_text}"
+        return await generate_with_google(google_prompt)
     except Exception as google_e:
         print(f"Google API Error: {google_e}. Switching to Groq...")
         if status_callback:
